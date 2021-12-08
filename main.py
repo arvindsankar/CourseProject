@@ -1,29 +1,44 @@
 import keys
 from datetime import datetime
 from datetime import timedelta
+from multiprocessing import Process, Queue
+
 from src.base_twitter_client import BaseTwitterClient
+from src.stream_client import StreamClient
+from src.stream_client import StreamRulesClient
 from src.search_client import SearchClient
 from src.tweet_lookup_client import TweetLookupClient
 
 API_KEY = keys.API_KEY
 API_SECRET_KEY = keys.API_SECRET_KEY
 BEARER_TOKEN = keys.BEARER_TOKEN
+CONSUMPTION_COMPLETE_MESSAGE = "DONE"
 
-start_date = datetime(2021, 11, 29, hour=3) # Monday
-end_date = datetime(2021, 11, 29, hour=3, minute=30)
-buffer = timedelta(minutes=5)
+def consume_tweet_stream(tweet_queue):
+    stream_client = StreamClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
+    rules_client = StreamRulesClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
 
-for _ in range(5):
-    start_date += timedelta(days=1)
-    end_date += timedelta(days=1)
+    print("current rules: " + str(rules_client.list_rules()))
+    rules_client.add_rule("cats")
 
-    start_time = start_date - buffer
-    end_time = end_date + buffer
+    stream_client.start_stream(tweet_queue, datetime.now() + timedelta(seconds=30))
 
-    print(start_time, end_time)
-    search_client = SearchClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
-    search_client.collect_tweets("Jeopardy", start_time.isoformat() + 'Z', end_time.isoformat() + 'Z')
+    for rule in rules_client.list_rules():
+        rules_client.delete_rule(rule)
 
-    lookup_client = TweetLookupClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
-    lookup_client.lookup_tweets(search_client.tweet_ids)
-    lookup_client.write_tweets_to_file("data/Jeopardy_{}_{}_{}".format(start_date.year, start_date.month, ('0' + str(start_date.day))[-2:]))
+    print("current rules: " + str(rules_client.list_rules()))
+
+    tweet_queue.put(CONSUMPTION_COMPLETE_MESSAGE)
+
+
+if __name__ == '__main__':
+    tweet_queue = Queue()
+    model_process = Process(target=consume_tweet_stream, args=(tweet_queue,))
+    model_process.start()
+
+    while True:
+        tweet = tweet_queue.get()
+        if tweet == CONSUMPTION_COMPLETE_MESSAGE:
+            break
+        else:
+            print(tweet)
