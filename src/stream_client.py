@@ -42,7 +42,6 @@ class StreamClient(BaseTwitterClient):
     def start_stream(self, queue, end_time):
         # Source: https://gist.github.com/hiway/4427458
         response = requests.get(self.api, headers=self.headers, stream=True)
-        print(response.status_code)
         for tweet_blob in response.iter_lines(chunk_size=1, decode_unicode=True):
             try:
                 tweet = json.loads(tweet_blob)

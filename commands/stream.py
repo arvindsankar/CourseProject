@@ -1,9 +1,11 @@
 import datetime
+import joblib
 import keys
 import random
 import time
 
 from multiprocessing import Process, Queue
+from src.preprocessor import PreProcessor
 from src.stream_client import StreamClient
 from src.stream_client import StreamRulesClient
 
@@ -13,13 +15,19 @@ BEARER_TOKEN = keys.BEARER_TOKEN
 CONSUMPTION_COMPLETE_MESSAGE = "DONE"
 
 class Stream():
-	def __init__(self, topic, model, output_, duration=datetime.timedelta(seconds=30)):
+	def __init__(self, topic, model, vectorizer, output_, duration=datetime.timedelta(seconds=30)):
 		self.topic = topic
-		self.model = model
 		self.output = output_
 		self.stream_client = StreamClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
 		self.rules_client = StreamRulesClient(keys.API_KEY, keys.API_SECRET_KEY, keys.BEARER_TOKEN)
 		self.duration = duration
+
+		try:
+			self.model = joblib.load(model)
+			self.vectorizer = joblib.load(vectorizer)
+		except:
+			raise 'Failed to load model via joblib!'
+		
 
 	def consume_tweet_stream(self, tweet_queue):
 
@@ -55,13 +63,14 @@ class Stream():
 				break
 			else:
 				tweet = tweet.encode("unicode_escape").decode("utf-8")
-				print(tweet)
-				next_line = "{},{}\n".format(str(random.randint(0,1)), tweet)
+				modified_tweet = PreProcessor(tweet).run()
+				prediction = int(self.model.predict(self.vectorizer.transform([modified_tweet]))[0])
+				next_line = "{},{}\n".format(prediction, tweet)
 				output_file.write(next_line)
 
 class StreamSimulator(Stream):
-	def __init__(self, model, input_, output_, duration=datetime.timedelta(seconds=30)):
-		super().__init__("Simulated", model, output_, duration)
+	def __init__(self, model, vectorizer, input_, output_, duration=datetime.timedelta(seconds=30)):
+		super().__init__("Simulated", model, vectorizer, output_, duration)
 		self.input = input_
 
 	def consume_tweet_stream(self, tweet_queue):
