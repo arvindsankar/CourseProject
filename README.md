@@ -195,9 +195,12 @@ The prefetched dataset consisting of around 2000 tweets is used. The various col
 ·   	date: tweet date
 ·   	polarity: sentiment of tweet. Either 1 or 0
 ·   	fulltweet: the text of the tweet
-For creating the models suggest running the notebook provided under the notebook folder. We need python version 3.6 and miniconda,  a free minimal installer for conda which can be downloaded from here- https://docs.conda.io/en/latest/miniconda.html.
-Create a new conda environment and install jupyter notebook and other dependencies. Start Jupyter notebook.
+For creating the models suggest running the notebook provided under the notebook folder. Start Jupyter notebook. Go to notebook (K_load_preprocess_training.ipynb) and start to run it- https://github.com/arvindsankar/CourseProject/tree/main/notebook. The notebook can be run in a step wise manner as directed here - https://github.com/arvindsankar/CourseProject/tree/main/notebook
+Install dependencies if there are any issues or errors installing using requirements.txt
+
 ```console
+(Optional- Install if dependencies didn't install correctly with requirements.txt)
+
 conda create -n my-conda-env                 # creates new virtual env
 conda activate my-conda-env                   # activate environment in terminal
 conda install jupyter                         # install jupyter + notebook
@@ -205,11 +208,13 @@ conda install jupyter                         # install jupyter + notebook
 conda install numpy
 conda install pandas
 conda install nltk
-​​conda install -c conda-forge matplotlib
+conda install -c conda-forge matplotlib
 conda install -c conda-forge wordcloud
 conda install seaborn
 conda install scikit-learn
-
+```
+Start notebook.
+```console
 jupyter notebook                  # start server + kernel inside my-conda-env
 ```
 Importing dependencies for creating models-
