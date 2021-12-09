@@ -84,10 +84,9 @@ class StreamSimulator(Stream):
 		delta = (self.duration.seconds * 1.0) / len(tweets)
 		variance = delta * 0.1
 
-		print("delta:{}, variance:{}".format(delta, variance))
 
 		for tweet in tweets:
 			time.sleep(delta + random.uniform(-variance, variance))
-			print(tweet)
+			tweet_queue.put(tweet)
 
 		tweet_queue.put(CONSUMPTION_COMPLETE_MESSAGE)
