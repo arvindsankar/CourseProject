@@ -195,7 +195,7 @@ The prefetched dataset consisting of around 2000 tweets is used. The various col
 ·   	date: tweet date
 ·   	polarity: sentiment of tweet. Either 1 or 0
 ·   	fulltweet: the text of the tweet
-For creating the models suggest running the notebook provided under the notebook folder. Start Jupyter notebook. Go to notebook (K_load_preprocess_training.ipynb) and start to run it- https://github.com/arvindsankar/CourseProject/tree/main/notebook. The notebook can be run in a step wise manner as directed here - https://github.com/arvindsankar/CourseProject/tree/main/notebook
+For creating the models suggest running the notebook provided under the notebook folder. Start Jupyter notebook. Go to notebook (K_load_preprocess_training.ipynb) and start to run it. The notebook can be run in a step wise manner as directed here - https://github.com/arvindsankar/CourseProject/tree/main/notebook
 Install dependencies if there are any issues or errors installing using requirements.txt
 
 ```console
