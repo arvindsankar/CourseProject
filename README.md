@@ -187,9 +187,24 @@ The prefetched dataset consisting of around 2000 tweets is used. The various col
 ·   	date: tweet date
 ·   	polarity: sentiment of tweet. Either 1 or 0
 ·   	fulltweet: the text of the tweet
-For creating the models suggest running the notebook provided under the notebook folder. We need python version 3.6 and miniconda.
-Importing dependencies-
+For creating the models suggest running the notebook provided under the notebook folder. We need python version 3.6 and miniconda,  a free minimal installer for conda which can be downloaded from here- https://docs.conda.io/en/latest/miniconda.html
+Create a new conda environment and install jupyter notebook and other dependencies. Start Jupyter notebook.
+```console
+conda create -n my-conda-env                 # creates new virtual env
+conda activate my-conda-env                   # activate environment in terminal
+conda install jupyter                         # install jupyter + notebook
 
+conda install numpy
+conda install pandas
+conda install nltk
+​​conda install -c conda-forge matplotlib
+conda install -c conda-forge wordcloud
+conda install seaborn
+conda install scikit-learn
+
+jupyter notebook                  # start server + kernel inside my-conda-env
+```
+Importing dependencies for creating models-
 ```console
 import csv
 import re
@@ -216,10 +231,11 @@ from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 ```
 
-Once the dependencies are imported we can read and load the labelled dataset provided under folder ‘notebook’ (week1_labelled_tweets2.csv and week2_labelled_tweets2.csv). Loading the dataset the notebook can be run in a step wise manner. 
+Once the dependencies are imported we can read and load the labelled dataset provided under folder ‘notebook’ (week1_labelled_tweets2.csv and week2_labelled_tweets2.csv). Loading the dataset the notebook (K_load_preprocess_training.ipynb) can be run in a step wise manner as directed here - https://github.com/arvindsankar/CourseProject/tree/main/notebook
+
 The data is analyzed and cleaned. Cleaning is done by removing urls, html codes, hashtags, mentions, stopwords. Stemming and Lemmatization is then applied on data. 
 
-After cleaning, the data is split into training and testing subsets. The Vectorizer provided is used to transform a string of text into something more similar to a bag of words model. (Our example one uses TF-IDF weighting that we learned in the Text Retrieval section of our class!).
+After cleaning, the data is split into training and testing subsets. The Vectorizer provided is used to transform a string of text into something more similar to a bag of words model. (Our example one uses TF-IDF weighting that we learned in the Text Retrieval section of our class!). 
 ```console
 X=df.fulltweet
 y=df.polarity
@@ -276,3 +292,8 @@ Accuracy Score of LogisticRegression: 0.852017937219731
 ```
 
 Once the models are trained and tested they are serialized using skc package to evaluate data. Note we use the joblib sklearn package to serialize and deserialize our models. Documentation on this package can be found here: https://joblib.readthedocs.io/en/latest/
+```console
+from joblib import dump, load
+dump(NB_model, 'NB_model.joblib') 
+dump(LogisticR_model, 'LogisticR_model.joblib')
+```
