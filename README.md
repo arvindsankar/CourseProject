@@ -7,7 +7,7 @@ Sentiment Analysis is used to identify the sentiments of the text source. Tweets
 
 ## Pointers for Grader
 Project Report - TODO
-Video - TODO: add youtube video link here.
+Video - https://www.youtube.com/watch?v=q64aoTrx_Zg
 
 To install this on your system, please use conda. After cloning and entering the CourseProject directory follow these steps.
 
@@ -20,8 +20,6 @@ pip install -r requirements.txt
 After requirements have been installed, you should be able to run through the notebook and run the system. Unless you have Twitter API keys, you should only look at the "evaluate" and "simulate" commands of the tool listed below. If you do have twitter API keys, feel free to run any of the commands documented below.
 
 ## Usage
-
-TODO: add requirements.txt and base environment. download all the required things and see if it works.
 
 We have written a wrapper around our system for the grader to use to run the code to collect tweets, evaluate the model, stream tweets, and simulate evaluating in real time.
 
