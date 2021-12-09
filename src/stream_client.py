@@ -10,7 +10,7 @@ class StreamRulesClient(BaseTwitterClient):
     def __init__(self, api_key, api_secret_key, bearer_token):
         super().__init__(api_key, api_secret_key, bearer_token)
         self.api = "https://api.twitter.com/2/tweets/search/stream/rules"
-        self.headers = {"Authorization" : f"Bearer {bearer_token}"}
+        self.headers = {"Authorization" : "Bearer {}".format(bearer_token)}
         self.data = {}
 
     def add_rule(self, search_term):
@@ -37,7 +37,7 @@ class StreamClient(BaseTwitterClient):
         super().__init__(api_key, api_secret_key, bearer_token)
         self.api = "https://api.twitter.com/2/tweets/search/stream"
         self.params = {}
-        self.headers = {"Authorization" : f"Bearer {bearer_token}"}
+        self.headers = {"Authorization" : "Bearer {}".format(bearer_token)}
 
     def start_stream(self, queue, end_time):
         # Source: https://gist.github.com/hiway/4427458

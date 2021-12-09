@@ -10,7 +10,7 @@ class TweetLookupClient(BaseTwitterClient):
         super().__init__(api_key, api_secret_key, bearer_token)
         self.api = "https://api.twitter.com/2/tweets"
         self.params = {}
-        self.headers = {"Authorization" : f"Bearer {bearer_token}"}
+        self.headers = {"Authorization" : "Bearer {}".format(bearer_token)}
         self.tweet_ids = []
         self.batch_size = 100
 

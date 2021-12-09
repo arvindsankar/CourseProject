@@ -8,7 +8,7 @@ class SearchClient(BaseTwitterClient):
         super().__init__(api_key, api_secret_key, bearer_token)
         self.api = "https://api.twitter.com/2/tweets/search/recent"
         self.params = {}
-        self.headers = {"Authorization" : f"Bearer {bearer_token}"}
+        self.headers = {"Authorization" : "Bearer {}".format(bearer_token)}
         self.max_results = 100
         self.tweet_ids = []
 
