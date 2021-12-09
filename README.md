@@ -296,4 +296,5 @@ Once the models are trained and tested they are serialized using skc package to 
 from joblib import dump, load
 dump(NB_model, 'NB_model.joblib') 
 dump(LogisticR_model, 'LogisticR_model.joblib')
+dump(vectorize_data_file, 'vectorizer.joblib')
 ```
