@@ -187,7 +187,7 @@ The prefetched dataset consisting of around 2000 tweets is used. The various col
 ·   	date: tweet date
 ·   	polarity: sentiment of tweet. Either 1 or 0
 ·   	fulltweet: the text of the tweet
-For creating the models suggest running the notebook provided under the notebook folder. We need python version 3.6 and miniconda,  a free minimal installer for conda which can be downloaded from here- https://docs.conda.io/en/latest/miniconda.html
+For creating the models suggest running the notebook provided under the notebook folder. We need python version 3.6 and miniconda,  a free minimal installer for conda which can be downloaded from here- https://docs.conda.io/en/latest/miniconda.html.
 Create a new conda environment and install jupyter notebook and other dependencies. Start Jupyter notebook.
 ```console
 conda create -n my-conda-env                 # creates new virtual env
