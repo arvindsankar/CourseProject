@@ -180,7 +180,9 @@ Here is an example with the sentiment:
 
 ### Creation of Models
 
-Creation of pre-trained models- This mode can be used to create and then evaluate the models. The prefetched dataset consisting of around 2000 tweets is used. The various columns in dataset are
+Creation of pre-trained models is found in the notebook/ directory. This includes preprocessing, training and testing of the models.
+
+The prefetched dataset consisting of around 2000 tweets is used. The various columns in dataset are
 ·   	tweetId: unique Id of tweet
 ·   	date: tweet date
 ·   	polarity: sentiment of tweet. Either 1 or 0
