@@ -9,6 +9,16 @@ Sentiment Analysis is used to identify the sentiments of the text source. Tweets
 Project Report - TODO
 Video - TODO: add youtube video link here.
 
+To install this on your system, please use conda. After cloning and entering the CourseProject directory follow these steps.
+
+```console
+conda create --name demo python=3.8
+conda activate demo
+pip install -r requirements.txt
+```
+
+After requirements have been installed, you should be able to run through the notebook and run the system. Unless you have Twitter API keys, you should only look at the "evaluate" and "simulate" commands of the tool listed below. If you do have twitter API keys, feel free to run any of the commands documented below.
+
 ## Usage
 
 TODO: add requirements.txt and base environment. download all the required things and see if it works.
