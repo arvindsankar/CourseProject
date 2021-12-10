@@ -6,8 +6,10 @@
 Sentiment Analysis is used to identify the sentiments of the text source. Tweets can be a very informative data source to collect data on a variety of opinion holders to sentiment analysis. They can help us understand the opinions and perspectives of various people on virtually any topic. There are over **200 million** twitter users with tweets we can mine in real time to get a real time view of how a sample of the population feels about a certain topic.  Holistically, our task was to build an ML pipeline and sentiment analysis model that can be trained on tweets, and to build a system that can use the model to predict the sentiment of tweets as they appear in real time.
 
 ## Pointers for Grader
+
 Project Report - https://github.com/arvindsankar/CourseProject/blob/main/Final%20Report_%20Sentiment%20Analysis%20on%20Real-Time%20Streaming%20Tweets.pdf
-Video - https://www.youtube.com/watch?v=q64aoTrx_Zg
+
+Demo - https://www.youtube.com/watch?v=q64aoTrx_Zg
 
 To install this on your system, please use conda. After cloning and entering the CourseProject directory follow these steps.
 
